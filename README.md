@@ -191,3 +191,32 @@ echo $_COOKIE["first_name"];
 //=> Alessandro
 ```
 
+## Database connection (PDO)
+```php
+$connection = new PDO(
+    'mysql:host=127.0.0.1;dbname=your_database_name',
+    'username',
+    'password'
+);
+```
+
+## Prepared statements
+```php
+$insertStatement = $connection->prepare('INSERT INTO students (first_name, last_name, note) VALUES (:firstName,:lastName,:note)');
+$insertStatement->bindParam('firstName', $_POST['first_name']);
+$insertStatement->bindParam('lastName', $_POST['last_name']);
+$insertStatement->bindParam('note', $_POST['note']);
+```
+
+## Try/Catch
+```php
+try {
+    $connection = new PDO(
+        'mysql:host=127.0.0.1;dbname=your_database_name',
+        'username',
+        'password'
+    );
+} catch(\Exception $exception) {
+    echo $exception->getMessage();
+}
+```
